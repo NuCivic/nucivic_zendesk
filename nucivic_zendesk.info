@@ -1,0 +1,4 @@
+name = nuCivic Zendesk Block
+description = Provides a "feedback" tab in a block.
+core = 7.x
+package = nuCivic

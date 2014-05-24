@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Simple block module for nucivic zendesk.
+ */
+
+/**
+ * Implements hook_block_info().
+ */
+function nucivic_zendesk_block_info() {
+  $blocks['feedback'] = array(
+    'info' => t('Zendesk feedback block'),
+    'region' => 'footer_second',
+    'status' => 1
+    'cache' => DRUPAL_NO_CACHE
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function nucivic_zendesk_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case '':
+      $block['subject'] = t('');
+      $block['content'] = theme('nucivic_zendesk_feedback');
+      break;
+    
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function nucivic_zendesk_theme($existing, $type, $theme, $path) {
+  return array(
+    'nucivic_zendesk_feedback' => array(
+      'variables' => array(),
+    ),
+  );
+}
+
+function theme_nucivic_zendesk_feedback() {
+  return <<<EOT
+<script type="text/javascript" src="//assets.zendesk.com/external/zenbox/v2.6/zenbox.js"></script>
+<style type="text/css" media="screen, projection">
+  @import url(//assets.zendesk.com/external/zenbox/v2.6/zenbox.css);
+</style>
+<script type="text/javascript">
+  if (typeof(Zenbox) !== "undefined") {
+    Zenbox.init({
+      dropboxID:   "20250478",
+      url:         "https://nucivic.zendesk.com",
+      tabTooltip:  "Support",
+      tabImageURL: "https://assets.zendesk.com/external/zenbox/images/tab_support.png",
+      tabColor:    "black",
+      tabPosition: "Left"
+    });
+  }
+</script>
+EOT;
+}
