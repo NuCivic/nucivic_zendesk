@@ -12,8 +12,8 @@ function nucivic_zendesk_block_info() {
   $blocks['support'] = array(
     'info' => t('Zendesk support block'),
     'region' => 'footer_second',
-    'status' => 1
-    'cache' => DRUPAL_NO_CACHE
+    'status' => 1,
+    'cache' => DRUPAL_NO_CACHE,
   );
 
   return $blocks;
@@ -26,7 +26,7 @@ function nucivic_zendesk_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
-    case '':
+    case 'support':
       $block['subject'] = t('');
       $block['content'] = theme('nucivic_zendesk_support');
       break;
